@@ -7,7 +7,7 @@ pipeline {
         stages {
         stage('Cloning git reposiry') {
             steps {
-                git branch: 'main', url: 'https://github.com/go-gitea/gitea.git'
+                git branch: 'main', url: 'https://github.com/bortnychuk/Gitea-pipeline.git'
             }
         }
         stage('Configuring Go, nodejs and build-essential') {
