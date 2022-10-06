@@ -17,7 +17,7 @@ pipeline {
                 sh 'sudo apt install make'
                 sh 'sudo apt-get install build-essential'
                 sh 'sudo go install github.com/google/go-licenses@latest'
-                sh 'echo "Hiiiii"'
+                sh 'ls -la'
             }
         }
         stage('Building Gitea application') {
