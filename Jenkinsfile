@@ -17,7 +17,7 @@ pipeline {
                 sh 'sudo apt install make'
                 sh 'sudo apt-get install build-essential'
                 sh 'sudo go install github.com/google/go-licenses@latest'
-                sh 'ls -l'
+                sh 'ls -la'
             }
         }
         stage('Building Gitea application') {
@@ -32,12 +32,12 @@ pipeline {
         }
         stage('Publish to Test Server') {
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'MyGiteaServer', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo mv /home/vagrant/gitea /opt/
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'MyGiteaServer', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''sudo mv /home/vagrant/chck/gitea /opt/
                 sudo chmod +x /opt/gitea
                 sudo chmod +x /usr/local/bin/gitea
                 sudo ln -s /opt/gitea /usr/local/bin/gitea
                 sudo systemctl daemon-reload
-                sudo systemctl start gitea''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/vagrant/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'gitea')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                sudo systemctl start gitea''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/vagrant/chck', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
